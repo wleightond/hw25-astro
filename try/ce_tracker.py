@@ -16,7 +16,7 @@ LONGITUDE = 18.4241   # degrees EAST (use + for East)
 # Stepper configuration
 STEP_ANGLE = 0.9        # degrees per full step
 FULL_STEPS = 360.0 / STEP_ANGLE  # = 400
-MICROSTEPS = 16
+MICROSTEPS = 32
 GEAR_RATIO = 1.0
 
 # Final steps per degree
