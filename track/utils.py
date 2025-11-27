@@ -12,8 +12,8 @@ XSTEP =  27    # Step pin
 ZSTEP = 10
 
 PINS = {
-    RA: (XSTEP, XDIR),
-    DEC: (ZSTEP, ZDIR),
+    DEC: (XSTEP, XDIR),
+    RA: (ZSTEP, ZDIR),
 }
 
 def setup():
