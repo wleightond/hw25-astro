@@ -18,10 +18,11 @@ def setmode(mode):
 
 def output(pin, value):
     if pin in [XSTEP, ZSTEP]:
-        sys.stdout.flush()
-        char = {HIGH: '-', LOW:'_'}[value]
-        sys.stdout.write(char)
-        sys.stdout.flush()
+        # sys.stdout.flush()
+        # char = {HIGH: '-', LOW:'_'}[value]
+        # sys.stdout.write(char)
+        # sys.stdout.flush()
+        pass
     # print(f'GPIO output {pin=} {value=}')
 
 def cleanup():

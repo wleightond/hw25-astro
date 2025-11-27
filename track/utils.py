@@ -2,13 +2,19 @@ import RPi.GPIO as GPIO
 import contextlib
 import time
 
-
+RA = 'RA'
+DEC = 'DEC'
 
 # GPIO pins
 XDIR = 22      # Direction pin
 ZDIR = 9
 XSTEP =  27    # Step pin
 ZSTEP = 10
+
+PINS = {
+    RA: (XSTEP, XDIR),
+    DEC: (ZSTEP, ZDIR),
+}
 
 def setup():
     print('setup init')
@@ -20,20 +26,23 @@ def setup():
     print('setup complete')
 
 def move_steps(
-    num_steps,
-    direction=1,
-    step_delay=0.001  # 1ms per step ≈ 1000 steps/sec
+    axis: str,
+    num_steps: int,
+    direction: int = 1,
+    step_delay: float = 0.0001  # 1ms per step ≈ 1000 steps/sec
 ):
+    step_pin, dir_pin = PINS[axis]
     """Move the motor by num_steps in given direction (1 = fwd, 0 = back)."""
-    print(f'Moving {num_steps=} in {direction=} with {step_delay=}')
-    GPIO.output(XDIR, GPIO.HIGH if direction == 1 else GPIO.LOW)
+    if num_steps:
+        # print(f'Moving {axis=} {num_steps=} in {direction=} with {step_delay=}')
+        GPIO.output(dir_pin, GPIO.HIGH if direction == 1 else GPIO.LOW)
 
-    for _ in range(num_steps):
-        GPIO.output(XSTEP, GPIO.HIGH)
-        time.sleep(step_delay)
-        GPIO.output(XSTEP, GPIO.LOW)
-        time.sleep(step_delay)
-    print('')
+        for _ in range(num_steps):
+            GPIO.output(step_pin, GPIO.HIGH)
+            time.sleep(step_delay)
+            GPIO.output(step_pin, GPIO.LOW)
+            time.sleep(step_delay)
+        # print('')
 
 def teardown():
     GPIO.cleanup()
