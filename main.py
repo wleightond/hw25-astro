@@ -65,10 +65,10 @@ def move_to_loc(current_ra, current_dec, ra=0, dec=0, verbose=False):
     return new_ra, new_dec
 
 def track_target(ra_deg: float, dec_deg: float):
-    dec_steps = int(dec_deg * dec_steps_per_deg)
-    ra_steps = int(ra_deg * ra_steps_per_deg)
     with env():
         current_ra, current_dec = current_baseline() + int(ra_steps_per_deg * get_LST(LONGITUDE)), 0
+        dec_steps = current_dec # int(dec_deg * dec_steps_per_deg)
+        ra_steps = current_ra # int(ra_deg * ra_steps_per_deg)
 
         tmp_ra, tmp_dec = -1, -1
         while tmp_ra != current_ra and tmp_dec != current_dec:

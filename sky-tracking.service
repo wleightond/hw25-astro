@@ -1,0 +1,12 @@
+[Unit]
+Description=Sky Tracking Service
+After=network-online.target
+[Service]
+ExecStart=/usr/bin/python3 -u main.py
+WorkingDirectory=/home/pi/hw25-astro
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=pi
+[Install]
+WantedBy=multi-user.target
